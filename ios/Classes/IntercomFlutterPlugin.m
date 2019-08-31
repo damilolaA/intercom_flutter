@@ -51,7 +51,12 @@
         result(@(count));
     }
     else if([@"displayMessenger" isEqualToString:call.method]) {
-        [Intercom presentMessenger];
+        NSString *message = call.arguments[@"initialMessage"];
+        if(message) {
+            [Intercom presentMessageComposerWithInitialMessage:message];
+        }else {
+            [Intercom presentMessenger];
+        }
         result(@"Presented messenger");
     }
     else if([@"displayHelpCenter" isEqualToString:call.method]) {
