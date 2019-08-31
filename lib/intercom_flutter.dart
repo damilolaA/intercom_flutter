@@ -94,8 +94,9 @@ class Intercom {
     });
   }
 
-  static Future<dynamic> displayMessenger() {
-    return _channel.invokeMethod('displayMessenger');
+  static Future<dynamic> displayMessenger({String initialMessage}) {
+    return _channel
+        .invokeMethod('displayMessenger', {'initialMessage': initialMessage});
   }
 
   static Future<dynamic> displayHelpCenter() {
