@@ -73,7 +73,12 @@ class IntercomFlutterPlugin(private val application: Application) : MethodCallHa
         }
       }
       call.method == "displayMessenger" -> {
-        Intercom.client().displayMessenger()
+        val initialMessage = call.argument<String>("initialMessage")
+        if(initialMessage != null) {
+          Intercom.client().displayMessageComposer(initialMessage);
+        } else {
+          Intercom.client().displayMessenger()
+        }
         result.success("Launched")
       }
       call.method == "displayHelpCenter" -> {

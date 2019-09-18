@@ -94,8 +94,17 @@ class Intercom {
     });
   }
 
-  static Future<dynamic> displayMessenger() {
-    return _channel.invokeMethod('displayMessenger');
+  static Future<dynamic> displayMessenger({String initialMessage}) {
+    return _channel
+        .invokeMethod('displayMessenger', {"initialMessage": initialMessage});
+  }
+
+  static Future<dynamic> displayMessageComposerWithInitialMessage(
+      String message) {
+    print('message $message');
+    // return _channel.invokeListMethod('displayMessageComposerWithInitialMessage', { message: message });
+    return _channel
+        .invokeListMethod('displayMessageComposer', {message: message});
   }
 
   static Future<dynamic> displayHelpCenter() {
@@ -108,10 +117,9 @@ class Intercom {
         .invokeMethod('logEvent', {'name': name, 'metaData': metaData});
   }
 
-   static Future<dynamic> sendTokenToIntercom(String token) {
-     print("Start sending token to Intercom");
-    return _channel
-        .invokeMethod('sendTokenToIntercom', {'token': token });
+  static Future<dynamic> sendTokenToIntercom(String token) {
+    print("Start sending token to Intercom");
+    return _channel.invokeMethod('sendTokenToIntercom', {'token': token});
   }
 
   static Future<dynamic> handlePushMessage() {
